@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Configuration, OpenAIApi } from 'openai';
 import { bbcTopNews } from '@/webScapping/bbcNews';
+import { bbcTopNewsLambda } from '../../../webScapping/bbcNewsLambda'
 
 const config = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -11,7 +12,7 @@ const openai = new OpenAIApi(config)
 export async function POST(request: Request){
 
     try {
-        const bbcnews = await bbcTopNews();
+        const bbcnews = await bbcTopNewsLambda();
         console.log(bbcnews)
         /*
         const response = await openai.createCompletion({

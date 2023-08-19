@@ -1,6 +1,31 @@
-import puppeteer from 'puppeteer';
+export const bbcTopNewsLambda = async () => {
 
-export const bbcTopNews = async () => {
+let chrome = {};
+let puppeteer;
+
+if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+    chrome = require("chrome-aws-lambda");
+    puppeteer = require("puppeteer-core");
+} else {
+    puppeteer = require("puppeteer");
+}
+
+let options: any = {};
+
+if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+    options = {
+        // @ts-ignore
+        args: [...chrome.args, "--hide-scrollbars", "--disable-web-security"],
+        // @ts-ignore
+        defaultViewport: chrome.defaultViewport,
+        // @ts-ignore
+        executablePath: await chrome.executablePath,
+        headless: true,
+        ignoreHTTPSErrors: true,
+    };
+}
+
+
     const browser = await puppeteer.launch({});
     const page = await browser.newPage();
     await page.goto('https://www.bbc.com/mundo');
