@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 
 export const bbcTopNews = async () => {
-    const browser = await puppeteer.launch({});
+    const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.goto('https://www.bbc.com/mundo');
     
