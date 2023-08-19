@@ -33,7 +33,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-24">
       <h1>Holi</h1>
       <button onClick={handleButton}>Dale acá</button>
-      {loading && !result && (
+      {loading && (
         <p className="font-bold my-5">cargando...</p>
       )}
       {result && !loading && (

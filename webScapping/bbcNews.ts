@@ -45,8 +45,8 @@ export const bbcTopNews = async () => {
     
     await browser.close();
 
-    const conciseNewsArray: string[] = titles.map(news => {
-        return `${news.title} - ${news.subtitle}`;
+    const conciseNewsArray: string[] = titles.map((news, index) => {
+        return `Noticia ${index}: ${news.title} - desarrollo:${news.subtitle}`;
     });
     return conciseNewsArray
 };

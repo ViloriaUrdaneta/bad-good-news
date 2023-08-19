@@ -14,10 +14,7 @@ export async function POST(request: any){
         const bbcnews = await bbcTopNews();
         console.log(bbcnews)
         const response = await openai.createCompletion({
-            prompt: `en este array de objetos estan los titulos y subtitulos de las principales noticias de la pagina de bbc mundo: ${bbcnews}
-            me puedes hacer un resumen general que abarque todas estas noticias en un solo texto corto y conciso de estas, 
-            dividiendolas en dos, primero aquellas noticias negativas que hablen de conflictos, guerras o crimenes 
-            y segundo aquellas con noticias más positivas que traten temas esperanzadores, cientificos, artisticos o graciosos, por favor?`,
+            prompt: `dame por favor un resumen muy resumido de todas estas noticias, separando por un lado las noticias negativas sobre crisis, guerras y conflictos; y por otro las noticias positivas sobre descubrimientos, arte ${bbcnews}`,
             model: 'text-davinci-003',
             temperature: 0.7,
             max_tokens: 150
