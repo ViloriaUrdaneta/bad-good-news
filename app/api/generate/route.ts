@@ -11,10 +11,11 @@ const openai = new OpenAIApi(config)
 export async function POST(request: any){
 
     try {
-        const bbcnews = await bbcTopNews();
-        console.log(bbcnews)
+        //const bbcnews = await bbcTopNews();
+        //console.log(bbcnews)
         const response = await openai.createCompletion({
-            prompt: `dame por favor un resumen muy resumido de todas estas noticias, separando por un lado las noticias negativas sobre crisis, guerras y conflictos; y por otro las noticias positivas sobre descubrimientos, arte ${bbcnews}`,
+           // prompt: `dame por favor un resumen muy resumido de todas estas noticias, separando por un lado las noticias negativas sobre crisis, guerras y conflictos; y por otro las noticias positivas sobre descubrimientos, arte ${bbcnews}`,
+            prompt: 'dime algo',
             model: 'text-davinci-003',
             temperature: 0.7,
             max_tokens: 150

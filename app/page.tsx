@@ -23,6 +23,7 @@ export default function Home() {
       setResult(data)
       
     } catch (error) {
+      alert(error)
       console.log(error)
     }
     setLoading(false);
