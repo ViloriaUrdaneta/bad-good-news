@@ -1,6 +1,5 @@
 'use client';
 import { useState } from "react";
-import { bbcTopNews } from "../webScapping/bbcNews";
 
 
 export default function Home() {
@@ -12,7 +11,6 @@ export default function Home() {
   const handleButton = async () => {
 
     setLoading(true);
-    
     try {
       const response = await fetch('/api/generate',{
         method: 'POST',
@@ -27,7 +25,6 @@ export default function Home() {
     } catch (error) {
       console.log(error)
     }
-    
     setLoading(false);
   }
 

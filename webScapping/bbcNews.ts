@@ -1,11 +1,9 @@
 import puppeteer from 'puppeteer';
 
-
 export const bbcTopNews = async () => {
     const browser = await puppeteer.launch({});
     const page = await browser.newPage();
     await page.goto('https://www.bbc.com/mundo');
-
     
     await page.waitForTimeout(2000);
     await page.waitForSelector('ol[role="list"]');
@@ -32,24 +30,23 @@ export const bbcTopNews = async () => {
             const titleElement = document?.querySelector('h1[id="content"]')?.innerText;
             // @ts-ignore
             const subtitleElement = document?.querySelector('main div p b')?.innerText;
-
             if (titleElement) {
                 tmp.title = titleElement;
             }
-
             if (subtitleElement) {
                 tmp.subtitle = subtitleElement;
             }
-
             return tmp;
         });
         titles.push(title);
+
+        
     }
-    console.log(topNewsLinks);
-    console.log(titles);
-    
     
     await browser.close();
 
-    return 'holi'
+    const conciseNewsArray: string[] = titles.map(news => {
+        return `${news.title} - ${news.subtitle}`;
+    });
+    return conciseNewsArray
 };
