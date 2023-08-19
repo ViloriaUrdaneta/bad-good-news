@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
 
-  const [result, setResult] = useState('')
+  const [result, setResult] = useState()
   const [loading, setLoading] = useState(false)
   const prompt = 'prompt'
 

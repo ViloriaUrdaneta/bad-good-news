@@ -8,11 +8,12 @@ const config = new Configuration({
 const openai = new OpenAIApi(config)
 
 
-export async function POST(request: any){
+export async function POST(request: Request){
 
     try {
-        //const bbcnews = await bbcTopNews();
-        //console.log(bbcnews)
+        const bbcnews = await bbcTopNews();
+        console.log(bbcnews)
+        /*
         const response = await openai.createCompletion({
            // prompt: `dame por favor un resumen muy resumido de todas estas noticias, separando por un lado las noticias negativas sobre crisis, guerras y conflictos; y por otro las noticias positivas sobre descubrimientos, arte ${bbcnews}`,
             prompt: 'dime algo',
@@ -21,7 +22,8 @@ export async function POST(request: any){
             max_tokens: 150
         })
         console.log(response.data.choices)
-        return NextResponse.json(response.data.choices[0].text)
+        return NextResponse.json(response.data.choices[0].text)*/
+        return NextResponse.json(bbcnews)
     } catch (error) {
         console.log('error en route', error)
         return NextResponse.json(error)
