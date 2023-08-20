@@ -26,7 +26,7 @@ if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
 }
 
 
-    const browser = await puppeteer.launch({});
+    let browser = await puppeteer.launch(options);
     const page = await browser.newPage();
     await page.goto('https://www.bbc.com/mundo');
     
