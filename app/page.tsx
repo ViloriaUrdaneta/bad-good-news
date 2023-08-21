@@ -13,11 +13,10 @@ export default function Home() {
     setLoading(true);
     try {
       const response = await fetch('/api/generate',{
-        method: 'POST',
+        method: 'GET',
         headers: {
           'content-Type': 'application/json'
         },
-        body: JSON.stringify({prompt})
       })
       const data = await response.json()
       setResult(data)

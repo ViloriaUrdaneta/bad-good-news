@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Configuration, OpenAIApi } from 'openai';
-import { bbcTopNews } from '@/webScapping/bbcNews';
-import { bbcTopNewsLambda } from '../../../webScapping/bbcNewsLambda'
+import { scrapi } from '@/webScapping/bbcNews';
 
 const config = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -9,22 +8,25 @@ const config = new Configuration({
 const openai = new OpenAIApi(config)
 
 
-export async function POST(request: Request){
+export async function GET(request: Request){
 
     try {
-        const bbcnews = await bbcTopNewsLambda();
+        const bbcnews = await scrapi();
         console.log(bbcnews)
-        /*
+        const conciseNewsArray: string[] = bbcnews.map((news: any, index: number) => {
+            return `Noticia ${index}: ${news.title} - desarrollo:${news.subtitle}`;
+        });
+        
         const response = await openai.createCompletion({
-           // prompt: `dame por favor un resumen muy resumido de todas estas noticias, separando por un lado las noticias negativas sobre crisis, guerras y conflictos; y por otro las noticias positivas sobre descubrimientos, arte ${bbcnews}`,
-            prompt: 'dime algo',
+            prompt: `puedes, por favor, de esta lista de la siguiente lista de Noticias agruparlas en dos grupos. Un grupo con las que son noticias negativas que tienen que ver con conflictos, guerras, enfermedades y delitos y otro grupo las que son noticias positivas que tienen que ver con descubrimientos, deportes y cultura. Por favor dame única y exclusivamente los numeros de cada noticia de la siguiente manera: Positivas: [1, 2, ...] , Negativas: [1, 2, ...] . Acá está la lista: ${conciseNewsArray}`,
+            //prompt: 'dime algo',
             model: 'text-davinci-003',
             temperature: 0.7,
             max_tokens: 150
         })
         console.log(response.data.choices)
-        return NextResponse.json(response.data.choices[0].text)*/
-        return NextResponse.json(bbcnews)
+        return NextResponse.json(response.data.choices[0].text)
+        //return NextResponse.json(conciseNewsArray)
     } catch (error) {
         console.log('error en route', error)
         return NextResponse.json(error)
